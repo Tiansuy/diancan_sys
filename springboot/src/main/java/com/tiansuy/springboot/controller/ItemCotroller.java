@@ -5,11 +5,15 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tiansuy.springboot.common.Result;
+import com.tiansuy.springboot.entity.Bill;
 import com.tiansuy.springboot.entity.Item;
+import com.tiansuy.springboot.mapper.BillMapper;
 import com.tiansuy.springboot.mapper.ItemMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/item")
@@ -17,9 +21,31 @@ public class ItemCotroller {
     @Resource
     ItemMapper itemMapper;
 
-    @PostMapping
-    public Result<?> save(@RequestBody Item item){
-        itemMapper.insert(item);
+    @Resource
+    BillMapper billMapper;
+
+    @PostMapping("/{table_num}/{uploader}")
+    public Result<?> save(@PathVariable Integer table_num,
+                          @PathVariable String uploader,
+                          @RequestBody List<Item> itemList){
+        // 创建bill对象，并insert
+        Bill bill = new Bill();
+        bill.setBill_date(new Date());
+        Double total_price=0.0;
+        for(Item item:itemList){
+            total_price+=item.getItem_price();
+        }
+        bill.setBill_price(total_price);
+        bill.setUploader(uploader);
+        bill.setTable_number(table_num);
+        billMapper.insert(bill);
+        for(Item item:itemList){
+            item.setOrder_id(bill.getBill_id());
+        }
+        // 依次insert item对象
+        for(Item item:itemList){
+            itemMapper.insert(item);
+        }
         return Result.success();
     }
 

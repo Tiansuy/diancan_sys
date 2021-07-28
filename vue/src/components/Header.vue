@@ -11,6 +11,7 @@
     <div v-if="user_info.user_type != '管理员'" style="flex: 0.6; padding-left: 20px;">
       <el-menu
         style="height:60px; line-height: 60px; font-size:34px; font-weight: 800;"
+        :default-active="headMenuIndex"
         active-text-color="#00A1D6"
         class="el-menu-demo"
         mode="horizontal"
@@ -118,6 +119,7 @@ export default {
   data() {
     return {
       user_info: {},
+      headMenuIndex:'/show-notice',
       user_psw:'',
       new_user_psw:'',
       new_user_psw2:'',
@@ -224,6 +226,7 @@ export default {
     },
     chooseMenu(index, indexPath) {
       console.log(index, indexPath);
+      this.headMenuIndex=index
       this.$router.push({ path: index });
     },
   },

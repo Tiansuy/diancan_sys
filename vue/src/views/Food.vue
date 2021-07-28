@@ -104,7 +104,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item label="菜品简介" :label-width="formLabelWidth">
-            <el-input v-model="form.food_desc" style="width:50%;" type="text" autocomplete="off"></el-input>
+            <el-input v-model="form.food_desc" style="width:50%;" type="textarea" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <template #footer>

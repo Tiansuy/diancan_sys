@@ -155,15 +155,22 @@
             handleChange(item) {
                 let exist = false
                 for (let i = 0; i < this.selectItems.length; i++) {
-                    if (item.food_id == this.selectItems[i].food_id) {
+                    if (item.food_id === this.selectItems[i].food_id) {
                         exist = true
-                        if (this.selectItems[i].select_num == 0) {
-                            this.selectItems.pop(item)
+                        if (this.selectItems[i].select_num === 0) {
+                            this.selectItems.splice(i,1)
+                            i--
                         }
                     }
                 }
+                // if(item.select_num===0){
+                //     this.selectItems.pop(item)
+                // }
                 if (!exist) {
                     this.selectItems.push(item)
+                }
+                if(this.selectItems.length===0){
+                    this.dialogTableVisible = false
                 }
                 console.log(this.selectItems)
             },

@@ -86,16 +86,13 @@ export default {
           return
         }
       }
-      for(let i=0;i<this.allBills.length;i++){
-        if(item.bill_id==this.allBills[i].bill_id){
-          this.allBills.pop(this.allBills[i])
-          this.form.bill_state="已烹饪"
-          this.form.bill_id=item.bill_id
-          request.put("bill",this.form).then(res=>{
-            console.log(res)
-          })
-        }
-      }
+		this.form.bill_state="已烹饪"
+		this.form.bill_id=item.bill_id
+		request.put("bill",this.form).then(res=>{
+			console.log(res)
+			this.load()
+			this.form={}
+		})
     },
     getButtonText(food_item){
       switch (food_item.item_state){

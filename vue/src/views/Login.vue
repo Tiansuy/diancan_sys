@@ -1,13 +1,13 @@
 <template>
-  <div style="width: 100%; height: 100vh;background-color: darkslateblue; overflow: hidden">
+  <div class="main">
     <div style="width: 400px; margin: 100px auto">
-      <div style="color: #cccccc; font-size: 30px; text-align: center; padding: 30px 0">欢迎登录</div>
+      <div style="color: #ffffff; font-size: 30px; text-align: center; padding: 30px 0">欢迎登录点餐系统</div>
       <el-form ref="form" :model="form" size="normal" :rules="rules">
         <el-form-item prop="username">
-          <el-input prefix-icon="el-icon-user-solid" v-model="form.username"></el-input>
+          <el-input placeholder="请输入用户名" prefix-icon="el-icon-user-solid" v-model="form.username"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input prefix-icon="el-icon-lock" v-model="form.password" show-password></el-input>
+          <el-input placeholder="请输入密码" prefix-icon="el-icon-lock" v-model="form.password" show-password></el-input>
         </el-form-item>
         <el-form-item>
           <el-radio-group v-model="form.user_type">
@@ -80,5 +80,13 @@ export default {
 </script>
 
 <style scoped>
-
+.main{
+  width: 100%;
+  height: 100vh;
+  /*background-color: darkslateblue;*/
+  background-image: url("../assets/3.jpg");
+  background-repeat:no-repeat;
+  background-size: 100% auto;
+  overflow: hidden
+}
 </style>
